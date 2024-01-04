@@ -3,14 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Controlled Notice Board</title>
+    <title>Smart Notice Board</title>
 </head>
 <body>
-    <h1>Welcome to Web Controlled Notice Board</h1>
-    <form method="post">
+    <form id="noticeForm">
         <label for="msg">Message:</label>
         <input type="text" id="msg" name="Message">
-        <input type="submit" value="Send">
+        <input type="button" value="Send" onclick="sendMessage()">
     </form>
+
+    <script>
+        function sendMessage() {
+            var message = document.getElementById("msg").value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "https://your-external-server.com/receive-message", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("Message=" + encodeURIComponent(message));
+        }
+    </script>
 </body>
 </html>
